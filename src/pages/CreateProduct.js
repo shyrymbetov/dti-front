@@ -9,6 +9,7 @@ const CreateProduct = () => {
     const [category, setCategory] = useState(categories[0]);
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
+    const [estimatedPrice, setEstimatedPrice] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,6 +27,20 @@ const CreateProduct = () => {
         }
     };
 
+    const handleEstimatePrice = async () => {
+        try {
+            const response = await API.post("/products/evaluate", {
+                name,
+                category,
+                description,
+            });
+            setEstimatedPrice(response.data);
+        } catch (error) {
+            console.error("Ошибка оценки цены:", error.response?.data?.message);
+        }
+    };
+
+
     return (
         <div className="create-product-container">
             <h1>Создание товара</h1>
@@ -38,6 +53,14 @@ const CreateProduct = () => {
                 </select>
                 <input type="number" placeholder="Цена" value={price} onChange={(e) => setPrice(e.target.value)} required className="input-field" />
                 <textarea placeholder="Описание" value={description} onChange={(e) => setDescription(e.target.value)} required className="textarea-field" />
+
+                <button type="button" onClick={handleEstimatePrice} className="estimate-button">
+                    Оценить цену
+                </button>
+                {estimatedPrice !== null && (
+                    <p className="estimated-price">Предполагаемая цена: {estimatedPrice} тенге</p>
+                )}
+
                 <button type="submit" className="submit-button">Создать</button>
             </form>
         </div>
