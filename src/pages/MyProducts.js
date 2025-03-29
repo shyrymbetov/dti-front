@@ -1,14 +1,14 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import API from "../api";
-import "./styles/Home.css";
+import "./styles/MyProducts.css"; // Подключаем стили
 
-const Home = () => {
+const MyProducts = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
         const fetchUserProducts = async () => {
             try {
-                const { data } = await API.get("/products");
+                const { data } = await API.get("/products/my");
                 setProducts(data);
             } catch (error) {
                 console.error("Ошибка загрузки товаров:", error.response?.data?.message);
@@ -20,7 +20,7 @@ const Home = () => {
 
     return (
         <div className="my-products-container">
-            <h1>Все товары</h1>
+            <h1>Мои товары</h1>
             {products.length === 0 ? (
                 <p>У вас пока нет товаров.</p>
             ) : (
@@ -39,4 +39,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default MyProducts;

@@ -25,6 +25,7 @@ const Navbar = () => {
                         <>
                             <Link to="/profile" className="nav-item">Профиль</Link>
                             <Link to="/create" className="nav-item">Добавить товар</Link>
+                            <Link to="/my" className="nav-item">Мои товары</Link>
                             <button onClick={handleLogout} className="logout-btn">Выйти</button>
                         </>
                     )}

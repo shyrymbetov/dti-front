@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import CreateProduct from "./pages/CreateProduct";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./pages/ProtectedRoute.js";
+import MyProducts from "./pages/MyProducts";
 
 const AppRoutes = () => {
     return (
@@ -23,6 +24,7 @@ const AppRoutes = () => {
                     {/* Защищённые маршруты */}
                     <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
                     <Route path="/create" element={<ProtectedRoute element={<CreateProduct />} />} />
+                    <Route path="/my" element={<ProtectedRoute element={<MyProducts />} />} />
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>
