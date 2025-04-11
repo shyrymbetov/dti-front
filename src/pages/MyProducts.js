@@ -31,6 +31,22 @@ const MyProducts = () => {
                             <p><strong>Категория:</strong> {product.category}</p>
                             <p><strong>Цена:</strong> {product.price} ₸</p>
                             <p><strong>Описание:</strong> {product.description}</p>
+
+                            {/* Check if the product has photos */}
+                            {product.photos && product.photos.length > 0 ? (
+                                <div className="product-photos">
+                                    {product.photos.map((photo, index) => (
+                                        <img
+                                            key={index}
+                                            src={photo}
+                                            alt={`Product photo ${index + 1}`}
+                                            className="product-photo"
+                                        />
+                                    ))}
+                                </div>
+                            ) : (
+                                <p>Нет фото для этого товара.</p>
+                            )}
                         </li>
                     ))}
                 </ul>
