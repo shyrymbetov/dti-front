@@ -3,7 +3,7 @@ import store from "./store";
 import {logout} from "./slices/authSlice";
 
 const API = axios.create({
-    baseURL: "/sso",
+    baseURL: "/api",
 });
 
 API.interceptors.request.use((config) => {
