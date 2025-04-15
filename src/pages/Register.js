@@ -5,13 +5,13 @@ import "./styles/Register.css";
 
 const Register = () => {
     const [formData, setFormData] = useState({
-        iin: "",
-        firstName: "",
-        lastName: "",
-        password: "",
+        name: "",
+        surname: "",
+        phoneNumber: "",
         email: "",
-        role: "USER",
+        password: "",
     });
+
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const Register = () => {
         setError(null);
 
         try {
-            const response = await API.post("/api/account/registration", formData);
+            const response = await API.post("/auth/register", formData);
             console.log("Успешная регистрация:", response.data);
             navigate("/login"); // Перенаправляем на страницу входа
         } catch (err) {
@@ -37,13 +37,49 @@ const Register = () => {
             <h1>Регистрация</h1>
             {error && <p className="error">{error}</p>}
             <form onSubmit={handleSubmit}>
-                <input type="text" name="iin" placeholder="ИИН" value={formData.iin} onChange={handleChange} required />
-                <input type="text" name="firstName" placeholder="Имя" value={formData.firstName} onChange={handleChange} required />
-                <input type="text" name="lastName" placeholder="Фамилия" value={formData.lastName} onChange={handleChange} required />
-                <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
-                <input type="password" name="password" placeholder="Пароль" value={formData.password} onChange={handleChange} required />
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Имя"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="text"
+                    name="surname"
+                    placeholder="Фамилия"
+                    value={formData.surname}
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="text"
+                    name="phoneNumber"
+                    placeholder="Телефон"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Пароль"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                />
                 <button type="submit">Зарегистрироваться</button>
             </form>
+
         </div>
     );
 };
